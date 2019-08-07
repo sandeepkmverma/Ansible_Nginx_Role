@@ -1,3 +1,4 @@
+---
 - name: Ansible role for Nginx
   hosts: localhost
   become: true
