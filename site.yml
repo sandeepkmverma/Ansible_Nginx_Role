@@ -1,0 +1,6 @@
+- name: Ansible role for Nginx
+  hosts: localhost
+  become: true
+  roles:
+     - role_nginx_server
+

@@ -1,0 +1,29 @@
+---
+- name: Intalling Java and Tomcat
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+     - java-1.8*
+     - tomcat
+
+- name: Setting JAVA_HOME path
+  lineinfile:
+    dest: /etc/environment
+    state: present
+    regexp: '^JAVA_HOME'
+    line: 'JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.201.b09-0.amzn2.x86_64'
+
+- name: Sourcing Environment File
+  shell: source /etc/environment
+
+- name: Starting and enabling Tomcat
+  service:
+    name: tomcat
+    state: started
+    enabled: yes
+
+- name: Copying Index.html page
+  copy:
+    src: index.html
+    dest: /usr/share/tomcat/webapps/ROOT/index.html
